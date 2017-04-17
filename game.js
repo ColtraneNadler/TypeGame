@@ -4,3 +4,5 @@
 */
 
 console.log('hi')
+
+var words_container = document.getElementById('words_inner')
