@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<script type="text/javascript" src="game.js"></script>
+</head>
+<body>
+	<div class="wrapper">
+		<!-- <div class="clock">
+			<div class="clock-frame">
+				<div class="inner-clock"></div>
+			</div>
+		</div> -->
+		<div class="box">
+			<div class="container">
+
+				<div id="time">00:45</div>
+
+				<!-- Contains words -->
+				<div class="words" id="words-outer"></div>
+				<div class="words" id="words-inner"></div>
+
+				<!-- Input words -->
+				<input id="input" class="form-control" placeholder="Words">
+			</div>
+
+
+			<div class="score" id="blue_score"></div>
+			<div class="score" id="red_score"></div>
+
+			<div class="border-box" id="box_pad_mid_high"></div>
+			<div class="border-box" id="box_pad_high"></div>
+			<div class="border-box" id="box_pad_mid_low"></div>
+			<div class="border-box" id="box_pad_low"></div>
+		</div>
+	</div>
+</body>
+
+
+<script type="text/javascript">
+	// var time, 
+	// elements
+ 	// let input = document.getElementById('input')
+ 		// , words = document.getElementById('words');
+
+ 	// word list
+	let dictionary;
+
+	let http = new XMLHttpRequest();
+	http.open('GET', '/words.txt', true);
+	http.send();
+	http.onreadystatechange = function() {
+		if(this.readyState === 4) {
+			dictionary = this.responseText.split('\n');
+			console.log(dictionary)
+		}
+	}
+
+	/**
+	* @param int score
+	* returns int rem
+	*/
+	function score2rem(score) {
+		// time percentage
+		var t = time / 60;
+
+		// if not the leader, what percentage of their score
+		var s = leader / score;
+
+		// time percentage multipled by score percentage
+		var p = t * s;
+
+		// multiply value by 40 to get percentage of rem to display score
+		return ~~(40 * p);
+	}
+
+</script>
+
+<style type="text/css">
+	@import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
+
+ 	* {
+ 		font-family: 'Press Start 2P', cursive;
+ 		padding: 0;
+ 		margin: 0;
+ 		border: 0;
+ 	}
+
+	.container {
+		width: 100%;
+	}
+
+	.wrapper {
+		margin: auto;
+		margin-top: 6rem;
+	}
+
+	.clock .clock-frame {
+		position: relative;
+		width: 12rem;
+		height: 3.5rem;
+		background-color: gray;
+		margin: auto;
+	}
+
+	.clock .inner-clock {
+		margin: auto;	
+		position: relative;
+		top: .5rem;
+		width: 10rem;
+		height: 2.5rem;
+		background-color: white;
+	}
+
+	.box {
+		margin: auto;
+		margin-top: 15rem;
+		position: relative;
+		width: 60rem;
+		height: 30rem;
+		background-color: gray;
+	}
+
+	#time {
+		margin: auto;
+		background-color: #a6a6a6;
+		margin-top: 2rem;
+		width: 12rem;
+		height: 2.5rem;
+		text-align: center;
+		font-size: 1.9rem;
+		box-shadow: 0px 0px 30px black;
+	}
+
+	.words {
+		position: relative;
+		margin: auto;
+		top: 5rem;
+		height: 12rem;
+	}
+
+	#words-outer {
+		width: 55rem;
+		background-color: #4d4d4d;
+		border-left: solid 1rem #a6a6a6;
+		border-right: solid 1rem #a6a6a6;
+		box-shadow: 0px 0px 30px black;
+	}
+
+	#words-inner {
+		top: -7rem;
+		width: 50rem;
+		background-color: white;
+	}
+
+	.highlight {
+
+	}
+
+	.correct {
+
+	}
+
+	.wrong {
+
+	}
+
+	.score {
+		width: 3rem;
+		position: absolute;
+		bottom: 0;
+	}
+
+	#red_score {
+		left: -3rem;
+		height: 10rem;
+		background-color: red;
+	}
+
+	#blue_score {
+		right: -3rem;
+		height: 25rem;
+		background-color: blue;
+	}
+
+	.border-box {
+		position: absolute;
+		left: -3rem;
+		width: 66rem;
+	}
+
+	#box_pad_mid_low {
+		bottom: -4rem;
+		height: 4rem;
+		background-color: #4d4d4d;
+	}
+
+	#box_pad_low {
+		position: absolute;
+		bottom: -4rem;
+		height: 1rem;
+		background-color: #a6a6a6
+	}
+
+	#box_pad_mid_high {
+		top: -4rem;
+		height: 4rem;
+		background-color: #4d4d4d;
+	}
+
+	#box_pad_high {
+		position: absolute;
+		top: -4rem;
+		height: 1rem;
+		background-color: #a6a6a6;
+	}
+</style>
+
+</html>
