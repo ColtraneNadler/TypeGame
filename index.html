@@ -11,8 +11,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link href="//fonts.googleapis.com/css?family=Noto+Sans:400,700" rel="stylesheet" type="text/css">
 
-	<script type="text/javascript" src="game.js"></script>
-	<script type="text/javascript" src="type.js"></script>
+	<script type="text/javascript" src="https://raw.githubusercontent.com/ColtraneNadler/TypeGame/master/type.js"></script>
 	<script src="//use.fontawesome.com/0658064e9f.js"></script>
 </head>
 <body>
@@ -65,7 +64,7 @@
 					<li><a href="//twitter.com/coltranenadler" target="_blank"><i class="fa fa-twitter"></i></a></li>
 					<li><a href="//github.com/coltranenadler" target="_blank"><i class="fa fa-github"></i></a></li>
 					<li><a href="mailto:coltranenadler@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
-					<li><a href="#/blog"><i class="fa fa-pencil"></i></a></li>
+					<!-- <li><a href="#/blog"><i class="fa fa-pencil"></i></a></li> -->
 				</ul>
 				<p>Made with <i class="fa fa-heart"></i> by Coltrane Nadler</p>
 			</div>
@@ -105,7 +104,7 @@
 
 	window.onload = function() {
 		let http = new XMLHttpRequest();
-		http.open('GET', '/words.txt', true);
+		http.open('GET', 'https://raw.githubusercontent.com/ColtraneNadler/TypeGame/master/words.txt', true);
 		http.send();
 		http.onreadystatechange = function() {
 			if(this.readyState === 4) {
