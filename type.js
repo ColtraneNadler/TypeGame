@@ -7,6 +7,7 @@ let LETTERS = 0;
 let correctKeyStrokes 		= 0
 	, incorrectKeyStrokes 	= 0;
 
+console.log('hi!!');
 let total = 0;
 let init = function() {
 	words 					= document.getElementById('word-box')

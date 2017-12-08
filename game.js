@@ -1,27 +1,37 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-
-class HelloMessage extends React.Component {
-  render() {
-    return <div>Hello {this.props.name}</div>;
-  }
-}
-
-ReactDOM.render(
-  <HelloMessage name="John" />,
-  document.getElementById('container')
-);
-
 /**
 * TypeGame © 2017 -
 * Coltrane Nadler
 */
 let words, input, activeWord, activeElem;
-let LETTERS = 0;
+let LETTERS 				= 0;
 let correctKeyStrokes 		= 0
-	, incorrectKeyStrokes 	= 0;
+	, incorrectKeyStrokes 	= 0
+	, dictionary
+	, countdown 			= false
+	, time 					= 60
+	, wordCount				= 0
+	, correctWordCount 		= 0;
 
 let total = 0;
+
+window.onload = function() {
+	let http = new XMLHttpRequest();
+	http.open('GET', 'https://raw.githubusercontent.com/ColtraneNadler/TypeGame/master/words.txt', true);
+	http.send();
+	http.onreadystatechange = function() {
+		if(this.readyState === 4) {
+			dictionary = this.responseText.split('\n');
+
+			// start game
+			init();
+		}
+	}
+}
+
+/**
+* @function init
+* Game wrapper
+*/
 let init = function() {
 	words 					= document.getElementById('word-box')
 	input 					= document.getElementById('input');
@@ -86,9 +96,6 @@ let init = function() {
 			let testCase = word.split('').splice(0, val.length).join('');
 			val = val.split(' ')[1] ? val.split(' ')[1] : val.split(' ')[0];
 			// let testCase = c.split(' ')[0].split('').splice(0, val.length).join('');
-			console.log(val + ' ' + testCase)
-
-			console.log(val !== testCase);
 
 			// incorrect keystroke
 			if(val !== testCase) {
@@ -150,12 +157,7 @@ let init = function() {
 			// , words = document.getElementById('words');
 
 		// word list
-	let dictionary
-		, countdown 	= false
-		, time 			= 60
-		, wordCount		= 0
-		, correctWordCount = 0
-		, timeElem 		= document.getElementById('time');
+	let timeElem 		= document.getElementById('time');
 
 	var redScore 		= document.getElementById('red-score')
 		, blueScore 	= document.getElementById('blue-score');
@@ -170,20 +172,6 @@ let init = function() {
 		keystrokes: document.getElementById('type-score-keystrokes'),
 		correctWordCount: document.getElementById('type-score-correct-word-count'),
 		incorrectWordCount: document.getElementById('type-score-incorrect-word-count')
-	}
-
-	window.onload = function() {
-		let http = new XMLHttpRequest();
-		http.open('GET', 'https://raw.githubusercontent.com/ColtraneNadler/TypeGame/master/words.txt', true);
-		http.send();
-		http.onreadystatechange = function() {
-			if(this.readyState === 4) {
-				dictionary = this.responseText.split('\n');
-
-				// start game
-				init();
-			}
-		}
 	}
 
 	restartBtn.addEventListener('click', e => {
@@ -248,5 +236,4 @@ let init = function() {
 		// multiply value by 40 to get percentage of rem to display score
 		return ~~(40 * p);
 	}
-
 }
